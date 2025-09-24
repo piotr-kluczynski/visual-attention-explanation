@@ -1,0 +1,16 @@
+Due to the invasive nature of the experiment, it was necessary to implement the VGG19 model on my own, using the definition provided by keras library.
+Although I aimed to keep my version as close as possible to the original implementation, some changes were necessary or not impactful on the model functioning.
+Nevertheless, it is important to keep track of them, in order to ensure reproducability of the experiment. Below is the list of all made changes to the original structure of the VGG19 model:
+- Removed unecessary parameters from the model (since many metaparameters will stay constant for all models) - include_top, weights.
+- Removed not needed if statement, which detect if appropriate weights path was provided
+- Removed not needed if statement, which was supposed to detect wrong number of classes for default weights (we're using custom ones)
+- Removed if statement, which was adding additional layers if "include_top" flag was activated (it's always disactivated in our case)
+- Removed if statement for loading weights from the web (we provide our own weights)
+- Removed the preprocess_input and decode_predictions functions (they're not needed for the experiment)
+- Removed the few last lines of code for preprocessing input?? I must admit I do not fully understand their function, yet they do not seem to be directly needed by the VGG19 model.
+- Removed not needed import statements: "keras.src.utils.file_utils" and "keras.src.api_export.keras_export"
+- Due to moving to Subclassing API, I changed the code required for setting an input shape, instead creating custom build method
+- Removed the global pooling method, since it wasn't used
+- Moved the loading weights function out of the definition
+
+The original implementation of the VGG19 network, is avaliable on the Github page: https://github.com/keras-team/keras/blob/v3.11.3/keras/src/applications/vgg19.py#L20.
